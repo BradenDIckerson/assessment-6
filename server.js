@@ -6,6 +6,19 @@ const {shuffleArray} = require('./utils')
 
 
 
+var Rollbar = require('rollbar')
+var rollbar = new Rollbar({
+  accessToken: '92213bfb5d784280bf2386a8ec91a660',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+})
+
+rollbar.log('Hello world!')
+
+
+
+
+
 app.use('/static', express.static(path.join(__dirname, 'public')))
 
 
@@ -22,14 +35,20 @@ app.get('/api/robots', (req, res) => {
     }
 })
 
+// app.get('/', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'public/index.html')) 
+// })
+
 app.get('/api/robots/five', (req, res) => {
     try {
         let shuffled = shuffleArray(bots)
         let choices = shuffled.slice(0, 5)
         let compDuo = shuffled.slice(6, 8)
         res.status(200).send({choices, compDuo})
+        rollbar.info('Bot were shuffled successfully')
     } catch (error) {
         console.log('ERROR GETTING FIVE BOTS', error)
+        rollbar.error('Error getting 5 bots')
         res.sendStatus(400)
     }
 })
@@ -66,9 +85,11 @@ app.post('/api/duel', (req, res) => {
             playerRecord.losses++
             res.status(200).send('You won!')
         }
+        rollbar.info('Dueling works.')
     } catch (error) {
         console.log('ERROR DUELING', error)
         res.sendStatus(400)
+        rollbar.error('Error with dueling.')
     }
 })
 

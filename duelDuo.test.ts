@@ -21,10 +21,35 @@ test('Title shows up when page loads', async () => {
 })
 
 test('Draw button Displays div with choices.', async () => {
-    let drawButton = await (await driver).findElement(By.xpath('//section/div')).getText()
-    expect(drawButton).toBe("choices")
+    const drawButton = await (await driver).findElement(By.id('draw'))
+    await driver.sleep(3000)
+
+    await drawButton.click()
+
+    await driver.sleep(3000)
+
+    const choicesSection = await driver.findElement(By.id('choices')) 
+
+    const isDisplayed = await choicesSection.isDisplayed();
+
+    expect(isDisplayed).toBe(true)
 })
 
 test('add to duo button displays player-id', async () => {
-    let addToDuo = await (await driver).findElement(By.xpath(''))
+    await driver.navigate().refresh();
+
+    const drawButton = await driver.findElement(By.id('draw'))
+
+
+    await driver.sleep(3000) 
+    
+    await drawButton.click()
+    
+    const addToDuoButtons = await driver.findElements(By.xpath('//button[text()="Add to Duo"]'))[1].click()
+    
+    await driver.sleep(3000) 
+    await addToDuoButtons[1].click() 
+    await driver.sleep(3000)
+
+
 })
