@@ -12,7 +12,7 @@ beforeEach(async () => {
 
 afterAll(async () => {
     driver.quit()
-})
+}) 
 
 test('Title shows up when page loads', async () => {
     const title = await driver.findElement(By.id('title'))
@@ -47,7 +47,7 @@ test('add to duo button displays player-id', async () => {
     
     const addToDuoButtons = await driver.findElements(By.xpath('//button[text()="Add to Duo"]'))[1].click()
     
-    await driver.sleep(3000) 
+    await driver.sleep(3000)  
     await addToDuoButtons[1].click() 
     await driver.sleep(3000)
 

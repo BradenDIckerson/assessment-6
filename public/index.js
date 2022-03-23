@@ -128,7 +128,7 @@ const drawFive = () => {
 }
 
 const duel = () => {
-    resultsText.textContent = 'Dueling...'
+    resultsText.textContent = 'Dueling...' 
     duelBtn.classList.add('hide')
     choicesDiv.innerHTML = ''
     chooseHeader.classList.add('hide')

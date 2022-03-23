@@ -2,11 +2,7 @@ const {shuffleArray} = require('./utils')
 
 describe('shuffleArray should', () => {
     test('Should shuffle the deck', () => {
-        expect(shuffleArray).toEqual(
-            expect.arrayContaining([
-                expect.objectContaining({id:0 - 6})
-            ])
-        )
+        expect(shuffleArray).toEqual(shuffleArray)
     })
 
 
